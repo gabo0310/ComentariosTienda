@@ -2,6 +2,7 @@ package com.example.gabrielnorena.firebase;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.gabrielnorena.firebase.Objetos.FirebaseReferences;
 import com.google.firebase.database.DataSnapshot;
@@ -22,13 +23,16 @@ public class  MainActivity extends AppCompatActivity {
         referencia.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int valor = dataSnapshot.getValue(Integer.class);
+                Log.i("DATOS", valor+"");
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", databaseError.getMessage());
 
             }
-        })
+        });
     }
 }
