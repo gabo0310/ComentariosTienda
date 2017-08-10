@@ -20,11 +20,12 @@ public class  MainActivity extends AppCompatActivity {
 
         FirebaseDatabase base_datos = FirebaseDatabase.getInstance();
         DatabaseReference referencia = base_datos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
-        referencia.addValueEventListener(new ValueEventListener() {
+
+        ValueEventListener escuchadorEventos = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int valor = dataSnapshot.getValue(Integer.class);
-                Log.i("DATOS", valor+"");
+                Log.i("DATOS", valor + "");
 
             }
 
@@ -33,6 +34,9 @@ public class  MainActivity extends AppCompatActivity {
                 Log.e("ERROR", databaseError.getMessage());
 
             }
-        });
+        };
+
+        //Con esto se va a firebase a obtener el valor de la base de datos
+        referencia.addListenerForSingleValueEvent(escuchadorEventos);
     }
 }
