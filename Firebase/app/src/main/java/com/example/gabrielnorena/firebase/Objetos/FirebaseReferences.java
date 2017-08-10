@@ -6,4 +6,6 @@ package com.example.gabrielnorena.firebase.Objetos;
 public class FirebaseReferences {
     //En este caso se debe declarar la variable asi porque es un TAG
     final public static String TUTORIAL_REFERENCE = "tutorial";
+    final public static String COCHE_REFERENCE = "coche";
+
 }
