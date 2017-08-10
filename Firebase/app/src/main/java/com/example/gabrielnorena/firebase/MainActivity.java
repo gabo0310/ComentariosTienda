@@ -26,28 +26,17 @@ public class  MainActivity extends AppCompatActivity {
         boton_coche = (Button) findViewById(R.id.boton_coche);
 
         FirebaseDatabase base_datos = FirebaseDatabase.getInstance();
-        DatabaseReference tutorialRef = base_datos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
+        final DatabaseReference tutorialRef = base_datos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
 
         boton_coche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Coche coche = new Coche("Ford", "Gabriel", 5, 4);
+                tutorialRef.child(FirebaseReferences.COCHE_REFERENCE).push().setValue(coche);
             }
         });
 
-        tutorialRef.child(FirebaseReferences.COCHE_REFERENCE).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Coche coche = dataSnapshot.getValue(Coche.class);
-                Log.i("COCHE", coche.getDueno());
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
 }
