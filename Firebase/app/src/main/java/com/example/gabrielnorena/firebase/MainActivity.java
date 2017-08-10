@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.gabrielnorena.firebase.Objetos.Coche;
 import com.example.gabrielnorena.firebase.Objetos.FirebaseReferences;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +25,8 @@ public class  MainActivity extends AppCompatActivity {
         tutorialRef.child(FirebaseReferences.COCHE_REFERENCE).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                Coche coche = dataSnapshot.getValue(Coche.class);
+                Log.i("COCHE", coche.getDueno());
 
             }
 
