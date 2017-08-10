@@ -21,7 +21,7 @@ public class  MainActivity extends AppCompatActivity {
         FirebaseDatabase base_datos = FirebaseDatabase.getInstance();
         DatabaseReference referencia = base_datos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
 
-        referencia.setValue(4);
+        referencia.push().setValue(7);
 
         ValueEventListener escuchadorEventos = new ValueEventListener() {
             @Override
