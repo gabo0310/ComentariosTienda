@@ -28,6 +28,7 @@ public class  MainActivity extends AppCompatActivity {
         FirebaseDatabase base_datos = FirebaseDatabase.getInstance();
         final DatabaseReference tutorialRef = base_datos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
 
+        //Se crea un registro en la base de datos de firebase
         boton_coche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
