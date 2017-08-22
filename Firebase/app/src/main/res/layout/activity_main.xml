@@ -41,14 +41,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Ingresar"
-            android:id="@+id/btnIngresar" />
+            android:id="@+id/boton_ingresar" />
 
         <Button
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Registrarse"
-            android:id="@+id/btnRegistrarse" />
+            android:id="@+id/boton_registrarse" />
     </LinearLayout>
 
 
