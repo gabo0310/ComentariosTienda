@@ -9,7 +9,11 @@ import android.widget.EditText;
 
 import com.example.gabrielnorena.firebase.Objetos.Coche;
 import com.example.gabrielnorena.firebase.Objetos.FirebaseReferences;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +24,8 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
 
     Button btnRegistrarse, btnIngresar;
     EditText txtEmail, txtClave;
+
+    FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +40,34 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
         btnRegistrarse.setOnClickListener(this);
         btnRegistrarse.setOnClickListener(this);
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+                FirebaseUser usuario = firebaseAuth.getCurrentUser();
+                if(usuario != null){
+                     Log.i("SESION", "Sesion iniciada con email: "+ usuario.getEmail());
+                }else {
+                    Log.i("SESION", "Sesion Cerrada");
+                }
+            }
+        };
+
 
 
     }
 
 
     private void registrar(String email, String clave){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,clave);
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Log.i("SESION", "usuario creado correctamente");
+                }else {
+                    Log.e("SESION", task.getException().getMessage());
+                }
+            }
+        });
     }
 
     private void iniciarSesion(String email, String clave){
@@ -51,9 +78,30 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.boton_ingresar:
+                String emailInicio = txtEmail.getText().toString();
+                String claveInicio = txtClave.getText().toString();
+                iniciarSesion(emailInicio, claveInicio);
                 break;
             case R.id.boton_registrarse:
+                String emailRegistro = txtEmail.getText().toString();
+                String claveRegistro = txtClave.getText().toString();
+                registrar(emailRegistro, claveRegistro);
                 break;
+        }
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null){
+            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
         }
     }
 }
