@@ -16,26 +16,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class  MainActivity extends AppCompatActivity {
 
-    Button boton_coche;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        boton_coche = (Button) findViewById(R.id.boton_coche);
-
-        FirebaseDatabase base_datos = FirebaseDatabase.getInstance();
-        final DatabaseReference tutorialRef = base_datos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
-
-        //Se crea un registro en la base de datos de firebase
-        boton_coche.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Coche coche = new Coche("Ford", "Gabriel", 5, 4);
-                tutorialRef.child(FirebaseReferences.COCHE_REFERENCE).push().setValue(coche);
-            }
-        });
 
 
 
