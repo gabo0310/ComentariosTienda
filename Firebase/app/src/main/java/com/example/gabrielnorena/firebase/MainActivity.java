@@ -71,7 +71,16 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void iniciarSesion(String email, String clave){
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,clave);
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.i("SESION", "Sesion iniciada");
+                } else {
+                    Log.e("SESION", task.getException().getMessage());
+                }
+            }
+        });
     }
 
     @Override
