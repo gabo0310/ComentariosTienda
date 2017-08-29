@@ -56,7 +56,7 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
+    //Metodo encargado de crear el usuario en Firebase
     private void registrar(String email, String clave){
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -70,6 +70,7 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    //Metodo encargado de validar los datos de usuario e iniciar sesión
     private void iniciarSesion(String email, String clave){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -82,6 +83,7 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
 
     @Override
     public void onClick(View v) {
