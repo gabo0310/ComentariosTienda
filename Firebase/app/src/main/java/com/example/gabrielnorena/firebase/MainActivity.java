@@ -1,5 +1,6 @@
 package com.example.gabrielnorena.firebase;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,15 +89,19 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            //Caso del boton ingresar que lo lleva al menu
             case R.id.boton_ingresar:
                 String emailInicio = txtEmail.getText().toString();
                 String claveInicio = txtClave.getText().toString();
                 iniciarSesion(emailInicio, claveInicio);
                 break;
+            //Caso del boton registrarse que lleva a formulario de registro
             case R.id.boton_registrarse:
                 String emailRegistro = txtEmail.getText().toString();
                 String claveRegistro = txtClave.getText().toString();
                 registrar(emailRegistro, claveRegistro);
+                Intent usuario = new Intent(MainActivity.this,RegistroUsuario.class);
+                startActivity(usuario);
                 break;
         }
     }
