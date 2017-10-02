@@ -39,7 +39,10 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
         txtClave = (EditText) findViewById(R.id.login_password);
 
         btnRegistrarse.setOnClickListener(this);
-        btnRegistrarse.setOnClickListener(this);
+        btnIngresar.setOnClickListener(this);
+
+
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -47,11 +50,13 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
                 FirebaseUser usuario = firebaseAuth.getCurrentUser();
                 if(usuario != null){
                      Log.i("SESION", "Sesion iniciada con email: "+ usuario.getEmail());
+                     ingresarInicio();
                 }else {
                     Log.i("SESION", "Sesion Cerrada");
                 }
             }
         };
+
 
 
 
@@ -64,6 +69,7 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Log.i("SESION", "usuario creado correctamente");
+                    ingresarRegistro();
                 }else {
                     Log.e("SESION", task.getException().getMessage());
                 }
@@ -73,11 +79,13 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
 
     //Metodo encargado de validar los datos de usuario e iniciar sesión
     private void iniciarSesion(String email, String clave){
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Log.i("SESION", "Entra");
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.i("SESION", "Sesion iniciada");
+                    ingresarInicio();
                 } else {
                     Log.e("SESION", task.getException().getMessage());
                 }
@@ -94,16 +102,26 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
                 String emailInicio = txtEmail.getText().toString();
                 String claveInicio = txtClave.getText().toString();
                 iniciarSesion(emailInicio, claveInicio);
+
                 break;
             //Caso del boton registrarse que lleva a formulario de registro
             case R.id.boton_registrarse:
                 String emailRegistro = txtEmail.getText().toString();
                 String claveRegistro = txtClave.getText().toString();
                 registrar(emailRegistro, claveRegistro);
-                Intent usuario = new Intent(MainActivity.this,RegistroUsuario.class);
-                startActivity(usuario);
+
                 break;
         }
+    }
+
+    private void ingresarInicio(){
+        Intent ingresar = new Intent(MainActivity.this,InicioUsuario.class);
+        startActivity(ingresar);
+    }
+
+    private void ingresarRegistro(){
+        Intent usuario = new Intent(MainActivity.this,RegistroUsuario.class);
+        startActivity(usuario);
     }
 
 
