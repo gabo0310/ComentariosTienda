@@ -9,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegistroUsuario extends AppCompatActivity implements View.OnClickListener{
 
     Button btnRegistroUsuario;
+    String emailUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,11 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         Bundle extras = intentInicioSesion.getExtras();
 
         if(extras != null){
-            String emailUsuario = extras.getString("EMAIL");
+            emailUsuario = extras.getString("EMAIL");
         }
+
+        FirebaseDatabase baseDatos = FirebaseDatabase.getInstance();
+        
 
 
 
