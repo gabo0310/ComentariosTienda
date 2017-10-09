@@ -24,6 +24,10 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         Intent intentInicioSesion = getIntent();
         Bundle extras = intentInicioSesion.getExtras();
 
+        if(extras != null){
+            
+        }
+
 
 
         btnRegistroUsuario = (Button) findViewById(R.id.boton_registrarUsuario);
