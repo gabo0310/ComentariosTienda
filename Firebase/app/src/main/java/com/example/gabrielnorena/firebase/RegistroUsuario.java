@@ -21,6 +21,9 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         setSupportActionBar(toolbar);
 
 
+        Intent intentInicioSesion = getIntent();
+        Bundle extras = getIntent();
+
         btnRegistroUsuario = (Button) findViewById(R.id.boton_registrarUsuario);
 
 
