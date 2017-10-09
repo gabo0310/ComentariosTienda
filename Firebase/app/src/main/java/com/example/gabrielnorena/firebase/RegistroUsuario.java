@@ -25,7 +25,7 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         Bundle extras = intentInicioSesion.getExtras();
 
         if(extras != null){
-            
+            String emailUsuario = extras.getString("EMAIL");
         }
 
 
