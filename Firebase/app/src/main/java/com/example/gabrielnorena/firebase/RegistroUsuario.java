@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.gabrielnorena.firebase.Objetos.FirebaseReferences;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistroUsuario extends AppCompatActivity implements View.OnClickListener{
@@ -32,7 +34,7 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         }
 
         FirebaseDatabase baseDatos = FirebaseDatabase.getInstance();
-        
+        DatabaseReference referencia = baseDatos.getReference(FirebaseReferences.USUARIO_REFERENCE);
 
 
 
