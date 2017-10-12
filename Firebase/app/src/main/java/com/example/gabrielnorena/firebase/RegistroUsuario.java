@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.gabrielnorena.firebase.Objetos.FirebaseReferences;
+import com.example.gabrielnorena.firebase.Objetos.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,8 +22,7 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
 
     Button btnRegistroUsuario;
     EditText edtCedula, edtNombre, edtApellido, edtCelular;
-    int cedulaUsuario;
-    String emailUsuario, nombreUsuario, apellidoUsuario, celularUsuario;
+    String emailUsuario;
     DatabaseReference referenciaUsuario;
 
     @Override
@@ -41,19 +41,12 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         }
 
         FirebaseDatabase baseDatos = FirebaseDatabase.getInstance();
-        referenciaUsuario.child(FirebaseReferences.USUARIO_REFERENCE).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
+        edtCedula = (EditText) findViewById(R.id.edtCedula);
+        edtNombre = (EditText) findViewById(R.id.edtNombre);
+        edtApellido = (EditText) findViewById(R.id.edtApellido);
+        edtCelular = (EditText) findViewById(R.id.edtCelular);
 
         btnRegistroUsuario = (Button) findViewById(R.id.boton_registrarUsuario);
 
@@ -67,7 +60,15 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.boton_registrarUsuario:
-                referenciaUsuario.child(FirebaseReferences.USUARIO_REFERENCE).push().setValue();
+
+                Usuario usuario = new Usuario();
+                usuario.setEmail(emailUsuario);
+                usuario.setCedula(Integer.parseInt(edtCedula.getText().toString()));
+                usuario.setNombre(edtNombre.getText().toString());
+                usuario.setApellido(edtApellido.getText().toString());
+                usuario.setCelular(edtCelular.getText().toString());
+
+                referenciaUsuario.child(FirebaseReferences.USUARIO_REFERENCE).push().setValue(usuario);
 
                 Intent ingresar = new Intent(RegistroUsuario.this,InicioUsuario.class);
                 startActivity(ingresar);
