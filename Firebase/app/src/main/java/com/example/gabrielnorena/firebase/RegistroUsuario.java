@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.gabrielnorena.firebase.Objetos.FirebaseReferences;
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +20,10 @@ import com.google.firebase.database.ValueEventListener;
 public class RegistroUsuario extends AppCompatActivity implements View.OnClickListener{
 
     Button btnRegistroUsuario;
-    String emailUsuario;
+    EditText edtCedula, edtNombre, edtApellido, edtCelular;
+    int cedulaUsuario;
+    String emailUsuario, nombreUsuario, apellidoUsuario, celularUsuario;
+    DatabaseReference referenciaUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,6 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
         }
 
         FirebaseDatabase baseDatos = FirebaseDatabase.getInstance();
-        DatabaseReference referenciaUsuario = baseDatos.getReference(FirebaseReferences.USUARIO_REFERENCE);
         referenciaUsuario.child(FirebaseReferences.USUARIO_REFERENCE).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,6 +67,8 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.boton_registrarUsuario:
+                referenciaUsuario.child(FirebaseReferences.USUARIO_REFERENCE).push().setValue();
+
                 Intent ingresar = new Intent(RegistroUsuario.this,InicioUsuario.class);
                 startActivity(ingresar);
                 break;
