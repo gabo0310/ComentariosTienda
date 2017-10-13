@@ -41,6 +41,8 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
         btnRegistrarse.setOnClickListener(this);
         btnIngresar.setOnClickListener(this);
 
+        FirebaseAuth.getInstance().signOut();
+
 
 
 
@@ -49,6 +51,8 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 FirebaseUser usuario = firebaseAuth.getCurrentUser();
                 if(usuario != null){
+                    //se deja en caso de que se necesite cerrar sesion para hacer pruebas
+                    //FirebaseAuth.getInstance().signOut();
                      Log.i("SESION", "Sesion iniciada con email: "+ usuario.getEmail());
                      ingresarInicio();
                 }else {

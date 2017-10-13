@@ -53,6 +53,7 @@ public class RegistroUsuario extends AppCompatActivity implements View.OnClickLi
 
         btnRegistroUsuario.setOnClickListener(this);
 
+        referenciaUsuario = baseDatos.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
 
     }
 
